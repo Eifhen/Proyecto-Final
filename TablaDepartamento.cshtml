@@ -1,0 +1,35 @@
+@model IEnumerable<FinalCodeFirst.Models.Departamento>
+
+@{
+    ViewBag.Title = "TablaDepartamento";
+}
+
+<h2>TablaDepartamento</h2>
+
+<p>
+    @Html.ActionLink("Agregar Nuevo Departamento", "Departamento")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CodigoDepartamento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreDepartamento)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodigoDepartamento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreDepartamento)
+        </td>
+   
+    </tr>
+}
+
+</table>
