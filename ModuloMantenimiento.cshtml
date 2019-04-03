@@ -6,11 +6,16 @@
 }
 
 <h2>Modulo de Mantenimiento</h2>
-<br/>
+<br />
 @Html.Label("Pulsa para ir a una accion", new { @class = "control-label col-md-5" })
 
-<a class="btn btn-outline-info btn-lg btn-block" href="Home/Home" role="button">Agregar Empleado</a>
-<br/>
-<a class="btn btn-outline-success btn-lg btn-block" href="Home/Home" role="button">Agregar Departamentos</a>
+
+@Html.ActionLink("Agregar Empleado", "Home", "Home",
+new { @class = "btn btn-outline-info btn-lg btn-block" })
 <br />
-<a class="btn btn-outline-warning btn-lg btn-block" href="Home/Home" role="button">Agregar Cargo</a>
+
+@Html.ActionLink("Agregar Departamentos", "Departamento", "Mantenimiento","Home",
+new { @class = "btn btn-outline-success btn-lg btn-block" })
+<br />
+@Html.ActionLink("Agregar Cargo", "Cargo", "Mantenimiento", "Home" ,
+new { @class = "btn btn-outline-warning btn-lg btn-block" })
