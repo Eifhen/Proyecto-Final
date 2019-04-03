@@ -1,0 +1,7 @@
+<connectionStrings>
+    <add name="BContext" 
+     connectionString="Data Source=LAPTOP-5PJ38VSD; 
+     Initial Catalog=CodeFirst; 
+     Integrated Security=True;" 
+     providerName="System.Data.SqlClient" />
+  </connectionStrings>  
