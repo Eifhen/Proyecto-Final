@@ -18,26 +18,27 @@
          new { area = "" }, new { @class = "navbar-brand" })
 
         <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
+           <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    @Html.ActionLink("Home", "Home", "Home",
+                    @Html.ActionLink("Home", "Home", "Home", "Mantenimiento",
                      new { @class = "nav-link" })
                 </li>
 
                 <li class="nav-item">
-                    @Html.ActionLink("Modulo de Mantenimiento", "ModuloMantenimiento", "Home",
+                    @Html.ActionLink("Modulo de Mantenimiento", "ModuloMantenimiento", "Home","Mantenimiento",
                      new { @class = "nav-link" })
                 </li>
 
                 <li class="nav-item">
-                    @Html.ActionLink("Modulo de Procesos", "ModuloProcesos", "Home",
+                    @Html.ActionLink("Modulo de Procesos", "ModuloProcesos", "Home", "Mantenimiento",
                      new { @class = "nav-link" })
                 </li>
 
                 <li class="nav-item">
-                    @Html.ActionLink("Modulo de Informes", "ModuloInforme", "Home",
+                    @Html.ActionLink("Modulo de Informes", "ModuloInforme", "Home", "Mantenimiento",
                      new { @class = "nav-link" })
                 </li>
+           
             </ul>
         </div>
     </nav>
