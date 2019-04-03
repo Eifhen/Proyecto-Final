@@ -1,0 +1,118 @@
+Proyecto Final GitHub
+
+
+----------------------------------- ---  Modulo de Mantenimientos ----- -------------------------------------------
+
+Este modulo consiste en crear formularios que alimenten las siguientes tablas
+
+*Empleado
+ (  id
+    Codigo Empleado
+    Nombre
+    Apellido
+    Telefono
+    Departamento
+    Cargo
+    Fecha Ingreso
+    Salario
+    Estatus Activo /Inactivo
+    )
+    
+ *Departamentos 
+ (  id
+    Codigo Departamento
+    Nombre Departamento
+ ) 
+ 
+ *Cargo
+ (  id
+    Nombre Cargo  
+ )
+    
+    
+    ----------------------------------------- Modulo Procesos ---------------------------------------------------
+    
+                       En este modulo se van a configurar algunos procesos y acciones.
+                       Vale decir que estos procesos y acciones son registrados en respectivas tablas
+                       
+    *Calculo Nomina
+    (
+   --> calcular el monto total de la nomina, sumando el salario de los empleados activos
+      y presentando el total, para que sea visto y validado por la persona encargada
+      almacenar en una tabla nominas la siguiente informacion.    <--
+      
+      Id
+      Año
+      Mes
+      Monto Total   
+    )                   
+                       
+    *Salida Empleados
+    (
+    -->   inactiva a un empleado y almacena la informacion en una tabla salidas  <--
+      
+      Empleado
+      Tipo Salida (Renuncia, Despido, Desahucio)
+      Motivo
+      Fecha Salida
+    )
+    
+    *Vacaciones
+    (  
+      --> Registra las vacaciones que tome un empleado <--
+      
+        Empleado
+        Desde (fecha de inicio de vacaciones)
+        Hasta (fecha fin de vacaciones)
+        Comentarios   
+    )
+                       
+    *Permisos  
+    (
+      --> Registra los permisos que tome un empleado <--
+    
+    Empleado
+    Desde
+    Hasta
+    Comentarios
+    
+    )  
+    *Licencias
+    (
+      --> Registra las licencias que tome un empleado <--
+    Empleado
+    Desde
+    hasta
+    Motivo
+    Comentario
+    )
+    
+                       
+************************************************** Modulo de Informes *********************************************************
+
+Nomina
+ -Con este Informe se busca visualizar todas las nominas de un Año especificado o bien visualizar
+  la correspondiente a un mes especifico.
+  
+Empleados Activos
+ -Aqui Buscamos Visualizar empleados activos de la empresa, con opcion de verlos todos, o de filtrar
+  por nombre o por departamento. (incluir ambos filtros)
+
+Empleados Inactivos
+ -Visualizar todos los empleados que han salido de la empreza
+ 
+Departamentos
+ -Listar los departamentos creados
+
+Cargos
+ -Listar los cargos creados
+ 
+Entradas de empleado por mes
+ -Visualizar las Entradas (empleados creados/ingresados) en un mes determinado por el usuario
+ 
+Salida de empleado por mes
+-Visualizar la Salida  (empleados creados/ingresados) en un mes determinado por el usuario
+
+Permisos
+-Visualizar los permisos tomados por un determinado empleado (a elegir por parte del usuario)
+                       
