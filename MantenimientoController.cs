@@ -59,5 +59,26 @@ namespace FinalCodeFirst.Controllers
 		{
 			return View(BD.Cargos.ToList());
 		}
+		
+		
+		[HttpGet]
+		public ActionResult Empleado()
+		{
+			return View();
+		}
+		[HttpPost]
+		public ActionResult Empleado(Empleado emp)
+		{
+
+			BD.Empleados.Add(emp);
+			BD.SaveChanges();
+			return RedirectToAction("Enviado");
+		}
+		public ActionResult Enviado()
+		{
+			return View();
+		}
+
+		
 	}
 }
