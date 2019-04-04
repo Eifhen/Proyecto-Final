@@ -1,7 +1,7 @@
 <connectionStrings>
-    <add name="BContext"  <------- este es Nombre de la cadena de coneccion
-     connectionString="Data Source=LAPTOP-5PJ38VSD; <--------aqui va el nombre del equipo o servidor de la base de datos
-     Initial Catalog=CodeFirst;   <-------- aqui va el nombre de la base de datos
+    <add name="BContext"  <!------- este es Nombre de la cadena de coneccion -->
+     connectionString="Data Source=LAPTOP-5PJ38VSD; <!--------aqui va el nombre del equipo o servidor de la base de datos -->
+     Initial Catalog=CodeFirst;   <!-------- aqui va el nombre de la base de datos -->
      Integrated Security=True;" 
-     providerName="System.Data.SqlClient" />  <------- nombre del cleinte SQL
+     providerName="System.Data.SqlClient" />  <!------- nombre del cleinte SQL -->
   </connectionStrings>  
