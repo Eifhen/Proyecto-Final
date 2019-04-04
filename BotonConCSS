@@ -1,6 +1,6 @@
- <div class="Search-Box">
-        <input type="text" class="Search-Text" placeholder="Buscar..." name="" />
-        <a class="Search-btn" href="#">
+ <div class="SB">
+        <input type="text" class="ST" placeholder="Buscar..." name="" />
+        <a class="Sbt" href="#">
             <i class="fas fa-search"></i>
         </a>
     </div>
