@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "TablaVacaciones";
+}
+
+<h2>TablaCalculoNomina</h2>
+
+<p>
+    @Html.ActionLink("Registrar Las Vacaciones del Empleado", "Vacaciones")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Vacaciones del Empleado")
+        </th>
+
+        <th>
+            @Html.DisplayName("Inicio de sus Vacaciones")
+        </th>
+        <th>
+            @Html.DisplayName("Final de sus Vacaciones")
+        </th>
+        <th>
+            @Html.DisplayName("Cometarios de las Vaciones")
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Empleado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaFinal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comentarios)
+
+            </td>
+
+        </tr>
+    }
+
+</table>

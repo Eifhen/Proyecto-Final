@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "TablaSalidasEmpleados";
+}
+
+<h2>TablaCalculoNomina</h2>
+
+<p>
+    @Html.ActionLink("Inactiva o Almacenar Salisas del Empleado", "SalidasEmpleados")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Inicactividad o Salida del empleado")
+        </th>
+
+        <th>
+            @Html.DisplayName("Tipo de Salida")
+        </th>
+        <th>
+            @Html.DisplayName("Motivo del Empleado")
+        </th>
+        <th>
+            @Html.DisplayName("Fecha de Salida del empleado")
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Empleado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoSalida)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Motivo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaSalida)
+
+            </td>
+
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "TablaCalculoNomina";
+}
+
+<h2>TablaCalculoNomina</h2>
+
+<p>
+    @Html.ActionLink("Agregar Nuevo Calculo de Nomina", "CalculoNomina")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Empleado de la nomina")
+        </th>
+
+        <th>
+            @Html.DisplayName("Año de Nomina")
+        </th>
+        <th>
+            @Html.DisplayName("Mes de Nomina")
+        </th>
+        <th>
+            @Html.DisplayName("Monto Total")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Empleado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Año)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mes)
+            </td>
+            <th>
+                @Html.DisplayFor(modelItem => item.MontaTotal)
+
+            </th>
+
+        </tr>
+    }
+
+</table>

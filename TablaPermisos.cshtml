@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "TablaPermisos";
+}
+
+<h2>TablaCalculoNomina</h2>
+
+<p>
+    @Html.ActionLink("Registrar los Permisos", "Permisos")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Permiso del empleado")
+        </th>
+
+        <th>
+            @Html.DisplayName("Inicio de su Permiso")
+        </th>
+        <th>
+            @Html.DisplayName("Final de su Permiso")
+        </th>
+        <th>
+            @Html.DisplayName("Cometarios del Permiso")
+        </th>
+        
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Empleado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaFinal)
+            </td>
+            <td
+                @Html.DisplayFor(modelItem => item.Comentarios)
+
+            </td>
+            
+        </tr>
+    }
+
+</table>
