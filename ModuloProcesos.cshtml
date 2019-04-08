@@ -1,0 +1,32 @@
+﻿
+@{
+    /**/
+
+    /**/
+
+    /**/
+
+    /**/
+
+    ViewBag.Title = "Modulo de Procesos";
+}
+
+<h2>Modulo de Procesos</h2>
+
+<br />
+@Html.Label("Pulsa para ir a una accion", new { @class = "control-label col-md-5" })
+
+@Html.ActionLink("Calculo de Nomina", "Home", "Home",
+new { @class = "btn btn-outline-info btn-lg btn-block" })
+<br />
+@Html.ActionLink("Salida de Empleados", "Home", "Home",
+new { @class = "btn btn-outline-danger btn-lg btn-block" })
+<br />
+@Html.ActionLink("Vacaciones", "Home", "Home",
+new { @class = "btn btn-outline-warning btn-lg btn-block" })
+<br />
+@Html.ActionLink("Permisos", "Home", "Home",
+new { @class = "btn btn-outline-success btn-lg btn-block" })
+<br />
+@Html.ActionLink("Licencias", "Home", "Home",
+new { @class = "btn btn-outline-primary btn-lg btn-block" })
