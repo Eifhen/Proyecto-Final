@@ -1,0 +1,697 @@
+-----------------------------------------------------------------------------
+--------------------------------- ASP CODE FIRST -----------------------
+-----------------------------------------------------------------------------
+                                       |
+                                       v
+      <div class="form-group">
+            @Html.Label("Fecha de Ingreso", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(a => a.Dia,
+                "Dia", new { @class = "form-control" })
+
+                @Html.EnumDropDownListFor(a => a.Mes,
+                "Mes", new { @class = "form-control" })
+
+                @Html.EnumDropDownListFor(a => a.Año,
+                "Año", new { @class = "form-control" })
+
+                @Html.EnumDropDownListFor(a => a.Estado,
+                "Estado del Empleado", new { @class = "form-control" })
+            </div>
+        </div>
+
+*****************************************************************************
+                           ***  ACTIVAR MIGRACIONES ***
+*****************************************************************************
+ 
+                     () Se abre el nget-package console ()
+-------------------------------------------------------
+
+   update-database
+   update - database-force
+   enable-migrations
+
+
+*****************************************************************************
+                             *** DB CONTEXT ***
+*****************************************************************************
+
+    Contexto BD = new Contexto();
+ 
+    public ActionResult dbView(){
+    return View(DB.FormModels.ToList());
+     }
+    
+    [HttpGet]
+   public ActionResult Create(){
+      return View();
+     }
+
+  [HttpPost]
+public ActionResult Index(Agenda agenda)
+{
+   BD.Agendas.Add(agenda);
+   BD.SaveChanges();
+   return RedirectToAction("tablaAgenda");
+   //return View(agenda);
+}
+------------------------------------------- ---------------
+        *** Enviar los datos a la tabla ***
+------------------------------------------- ---------------
+
+public ActionResult tablaAgenda()
+{
+    return View(BD.Agendas.ToList());
+}
+-------------------------------------------------------
+******************** BUSCADOR *************************
+--------------------------------------------------------
+[HttpPost]
+public ActionResult tablaAgenda(string BuscarNombre)
+{
+  var nombreBuscado = from contacto
+		      in BD.Agendas
+		      select contacto;
+
+   nombreBuscado = nombreBuscado.Where(c => c.Nombre.Contains(BuscarNombre));
+
+    if (string.IsNullOrEmpty(BuscarNombre))
+    {
+     nombreBuscado = nombreBuscado.Where(c => c.Nombre.Contains(BuscarNombre));
+     }
+    
+     return View(nombreBuscado);
+}
+		
+
+-------------------------------------------------------------
+
+	[HttpPost]
+     public ActionResult Form(Registrar r)
+     {
+       if (ModelState.IsValid) 
+         {
+           return View("Iniciar", r);
+
+           } 
+
+       else  {
+	return View();
+       //envia los datos al modelo
+        }
+     }
+------------------------------------------------------------
+******************** Clase Contexto *************
+-------------------------------------------------------
+public class Contexto : DbContext
+{
+
+   public Contexto()
+   : base("CadenaAgenda") // NOMBRE DE LA CADENA DE CONEXION
+     { }
+
+      // CREA LA TABLA A partir de la 
+     // clase que le pasamos "<clase>"
+    // tabla agenda
+
+    public DbSet<Agenda> Agendas { get; set; }
+    // tabla eventos
+    public DbSet<Evento> Eventos { get; set; }
+	}
+---------------------------------------------------------------
+
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    
+    public partial class dataFirstEntities : DbContext
+
+--------------------------------------------------------------
+****   /  *****
+--------------------------------------------------------------
+
+****************************************************************************
+                           *** CONNECTION-STRING **
+*****************************************************************************
+
+  <connectionStrings>
+    <add name="CadenaFinal" 
+     connectionString="Data Source = LAPTOP-5PJ38VSD; 
+     Initial Catalog= FinalCodeFirst; 
+     Integrated Security=True;" 
+     providerName="System.Data.SqlClient" />
+  </connectionStrings>  
+
+****************************************************************************
+                             *** Links Helpers ***
+*****************************************************************************
+
+1-https://www.tutorialsteacher.com/mvc/html-helpers
+2-https://desarrolloweb.com/articulos/helpers-formularios-dotnet.html
+3-https://docs.microsoft.com/es-es/dotnet/csharp
+       /programming-guide
+      /concepts/linq
+     /getting-started-with-linq
+
+*****************************************************************************
+                             *** RadioButton ***
+*****************************************************************************
+
+@using (Html.BeginForm("OperacionG", "Home", FormMethod.Post))
+{
+    <label>Tipo de Convercion</label>
+   
+    <label>Farenheith to Celcius</label>
+     @Html.RadioButton("grado", "1")
+   
+    <label>Celcius to Farenheith</label>
+     @Html.RadioButton("grado", "2")
+
+    <div class="form-group">
+        @Html.TextBoxFor(model => model.grados, 
+         new { @class = "form-control", placeholder = "# Grados" })
+      
+        @{
+            if (Model != null)
+            {
+                <div class="alert alert-primary" role="alert">
+                <label>@Model.grados</label>
+                </div>
+            }
+
+        }
+
+    </div>
+
+**************************************************************************
+    public ActionResult OperacionG(UnitConverterModel ucm)
+	{
+            if (Request.Form["grado"] != null)
+	    {
+	        String selectedGrado = Request.Form["grado"].ToString();
+                 if (selectedGrado == "1")
+		{
+		   ucm.Conversion(ucm.grados);
+		   return UnitConverter(ucm);
+		}
+		   
+                 if (selectedGrado == "2")
+		{
+		   ucm.Conversion2(ucm.grados);
+		   return UnitConverter(ucm);
+		}
+
+	      }
+                   return UnitConverter(ucm);
+	}
+
+****************************************************************************
+                         *** RadioButton 2 ***
+                              
+                              Validacion
+
+****************************************************************************
+***Vista Formulario***
+----------------------
+ <div> <!--EstadoCivil-->
+        <h6 class=" alert alert-light">Estado Civil</h6>
+
+        <div class="form-row col-md-4">
+         @Html.Label("Casado", htmlAttributes:
+         new { @class = "control-label col-md-6" })
+         @Html.RadioButton("EstadoCivil", "1") <!--Casado-->
+          </div>
+
+         <div class="form-row col-md-4">
+          @Html.Label("Soltero", htmlAttributes:
+          new { @class = "control-label col-md-6" })
+          @Html.RadioButton("EstadoCivil", "2") <!--Soltero-->
+         </div>
+
+         <div class="form-row col-md-4">
+          @Html.Label("Union Libre", htmlAttributes:
+          new { @class = "control-label col-md-6" })
+          @Html.RadioButton("EstadoCivil", "3") <!--UnionLibre-->
+         </div>
+
+         <div class="form-row col-md-4">
+          @Html.Label("Viudo/a", htmlAttributes:
+          new { @class = "control-label col-md-6" })
+          @Html.RadioButton("EstadoCivil", "4") <!--Viudo-->
+         </div>
+        </div>  <!--EstadoCivil-->
+-------------
+***Modelo***
+------------
+   String estadocivil;
+   public String EstadoCivil
+    {
+	get
+	{
+	   return estadocivil;
+	}
+	set
+	{
+	    estadocivil = value;
+	}
+     } //(Casado/Soltero/Viudo/Union Libre) (RadioButton)
+
+----------------
+***Validacion***
+----------------
+  if (Request.Form["EstadoCivil"] != null)
+{
+    String selectedRadio = Request.Form["EstadoCivil"].ToString();
+    String soltero = "Soltero"; 
+    String Casado = "Casado";
+    String UnionLibre = "Union Libre"; 
+    String Viudo = "Viudo";
+
+    if (selectedRadio == "1")
+    {
+	r.EstadoCivil = Casado;
+	}
+    if (selectedRadio == "2")
+    {
+	r.EstadoCivil = soltero;
+     }
+    if (selectedRadio == "3")
+    {
+	r.EstadoCivil = UnionLibre;
+     }
+    if (selectedRadio == "4")
+     {
+	r.EstadoCivil = Viudo;
+     }
+}
+
+
+*****************************************************************************
+                       *** Boostrap4 NavBar fixed ***
+*****************************************************************************
+
+ <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+-----------------------------------------------------------------------------
+
+ <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-warning">
+
+        @Html.ActionLink("HomeWork", "Index", "Home", 
+         new { area = "" }, new { @class = "navbar-brand" })
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    @Html.ActionLink("Home", "Index", "Home", 
+                     new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Events", "CreateEvents", "Home", 
+                    new { @class = "nav-link" })
+                </li>
+
+            </ul>
+            </div>
+                </nav>
+
+******************************************************************************
+                   *********    FORM EXAMPLE   ***************
+******************************************************************************
+
+<div class="card bg-light mb-3" style="max-width: 18rem;">
+  <div class="card-header">Header</div>
+  <div class="card-body">
+    <h5 class="card-title">Light card title</h5>
+    <p class="card-text">
+      Some quick example text to build on the card 
+       title and make up the bulk of the card's content.
+     </p>
+  </div>
+******************************************************************************
+               ************ Codigo AutoGenerado Example **************
+******************************************************************************
+
+ <div class="form-group">
+     @Html.LabelFor(model => model.Fecha, htmlAttributes: 
+       new { @class = "control-label col-md-4" })
+
+      <div class="col-md-10">
+        @Html.EditorFor(model => model.Fecha, 
+          new { htmlAttributes = new { @class = "form-control" } })
+
+        @Html.ValidationMessageFor(model => model.Fecha, "",
+          new { @class = "text-danger" })
+       </div>
+  </div>
+****************************************************************************
+                             *** PLACEHOLDER ****
+*****************************************************************************
+
+
+ new { htmlAttributes = new { placeholder = "Your Placeholder Text" } }
+
+***************************************************************************
+                           ***** DROPDOWN-LIST *****
+***************************************************************************
+
+<div class="form-row col-md-4">
+  @Html.DropDownList("Genero",
+   new SelectList(Enum.GetValues(typeof(Gender))),
+   "Selecciona el Genero",
+   new { @class = "form-control" })
+</div>
+
+
+***  En el MODELO  *****
+------------------------
+public String Genero { get; set; } 
+
+ public enum Gender
+       {
+	             Hombre,
+	             Mujer
+       }
+
+**** Validacion *****
+---------------------------
+
+ if (Request.Form["Genero"] != null)
+{
+     String GeneroMas = "Masculino";
+     String Generofem = "Fememino";
+     String selectedDropDownList = Request.Form["Genero"].ToString();
+     if(selectedDropDownList == "Hombre")
+     {
+	r.Genero = GeneroMas;
+     }
+     if (selectedDropDownList == "Mujer")
+     {
+	r.Genero = Generofem;
+     }
+}
+
+** Vista **
+---------------------------
+
+  <div class="form-row col-md-5">
+            @Html.LabelFor(model => model.Genero, htmlAttributes:
+             new { @class = "control-label col-md-5" })
+            @Model.Genero
+   </div>
+
+
+******************************************************************************
+************************* OTRA FORMA DE HACERLO *******************************
+******************************************************************************
+
+****En el Modelo*****
+---------------------
+
+ public DatosGenero Genero { get; set; }
+
+  public enum DatosGenero
+    {
+        Masculino,
+        Femenino
+            
+    }
+
+*********En la Vista del formulario**********
+----------------------------------------------
+  <div>
+   @Html.LabelForModel("Genero")
+   @Html.EnumDropDownListFor(a => a.Genero, 
+   "Seleccione su genero", new { @class = "form-control" })
+  </div>
+
+****** En la vista de mostrar los datos************
+----------------------------------------------------
+
+<div>
+    Genero: @Model.Genero
+</div>
+
+*****************************************************************************
+                       *** Persistencia de Datos ***
+*****************************************************************************
+
+
+ <div>
+
+   <label>Mi Nombre es:@Model.Nombre</label>
+   </br>
+   <label>Mi Edad es: @Model.Edad</label>
+   </br>
+   <label>Mi Carrera es:@Model.Carrera</label>
+   </br>
+   <label>Mi Cuatrimestre es el:@Model.Cuatrimestre</label>
+   </br>
+       
+ </div>
+
+***************************************************************************
+                           ***  NODOS LOGICA ***
+*****************************************************************************
+
+private int dato;
+private node siguiente;
+
+ public int Dato
+   {
+	get
+	{
+	   return dato;
+	}
+	set
+	{
+	   dato = value;
+	}
+      }
+     
+  public node Siguiente
+   {
+      get
+      {
+	return siguiente;
+      }
+	set 
+        {
+	 siguiente = value;
+	 }
+    }
+****************************************************************************
+                       *** ValidarCheckBox ***
+***************************************************************************
+
+String SelectedCheckBox1 = Request.Form["Guitarra"].ToString();
+String SelectedCheckBox2 = Request.Form["Pintar"].ToString();
+String SelectedCheckBox3 = Request.Form["Dibujar"].ToString();
+String SelectedCheckBox4 = Request.Form["Nadar"].ToString();
+String F = "false";
+		
+  if(SelectedCheckBox1 != F)
+  {
+     String Guitar = " Guitarra";
+     r.Hobbys = r.Hobbys+Guitar;
+  }
+  if(SelectedCheckBox2 != F)
+  {
+     String Paint = " Pintar";
+     r.Hobbys = r.Hobbys+Paint;
+  }
+  if(SelectedCheckBox3 != F)
+  {
+     String Dibujar = " Dibujar";
+     r.Hobbys = r.Hobbys + Dibujar;
+   }
+  if(SelectedCheckBox4 != F)
+  {
+     String Nadar = " Nadar";
+     r.Hobbys = r.Hobbys + Nadar;
+  }
+
+***************************************** *********************************
+                        ****** Validar CHECKBOX 2 ******
+***************************************** *********************************
+
+***************** formulario ***********************
+----------------------------------------------------
+     <div>
+            @Html.Label("Pasatiempo(s)")
+            @Html.LabelForModel("Leer")
+            @Html.CheckBoxFor(a => a.Hobby1)
+            @Html.LabelForModel("Programar")
+            @Html.CheckBoxFor(a => a.Hobby2)
+            @Html.LabelForModel("Baloncesto")
+            @Html.CheckBoxFor(a => a.Hobby3)
+
+        </div>
+
+*************** en el Modelo  *************************
+-------------------------------------------------------
+
+        //Declaro cada hobby como una propiedad booleana
+        //Leer
+        public bool Hobby1 { get; set; }
+        //Programar
+        public bool Hobby2 { get; set; }
+        //Baloncesto
+        public bool Hobby3 { get; set; }
+
+/// en el controlador se mandan los datos a la vista
+/// mostrar datos y se valida el estado del modelo
+
+
+************** en la vista de mostrar los datos *****************
+-----------------------------------------------------------------
+
+<div>
+    Pasatiempos: @if (Model.Hobby1 == true) { <label>"Leer"</label> }
+                 @if (Model.Hobby2 == true) { <label>"Programar"</label> }
+                 @if (Model.Hobby3 == true) { <label>"Baloncesto"</label> }
+</div>
+
+
+***************************************** *********************************
+                     ****** Validar CHECKBOX 3  ******
+                            ** Con Array **
+***************************************** *********************************
+
+Modelo--
+----------------------------------
+
+   public string[] Hobbies { get; set; }
+
+------------------
+Formulario--
+------------------
+@Html.Label("Pasatiempo(s)")
+@Html.CheckBox("Hobbies[]", false, new { @value = "Leer" }) Leer
+@Html.CheckBox("Hobbies[]", false, new { @value = "Programar" }) Programar
+@Html.CheckBox("Hobbies[]", false, new { @value = "Baloncesto" }) Baloncesto
+
+-----------------------------
+Vista que muestra los datos ---
+-----------------------------
+<div>
+     @Html.Label("Pasatiempo(s)")
+     @for (int i = 0; i < Model.Hobbies.Length; i++)
+    {
+        if (Model.Hobbies[i] != "false")
+        {
+            @Model.Hobbies[i]
+            <span> </span>
+        }
+    }
+</div>
+
+
+****************************************************************************
+                                TOTALIZAR y Actualizar
+****************************************************************************
+public ActionResult Totalizar()
+{
+  ViewBag.TotalSalario = db.Linq.Sum(a => a.salario);
+  ViewBag.TotalEmpleados = db.Linq.Count();
+
+  var query = (from a in db.Linq
+               where a.nombre == "Juan"
+               select a).First();
+
+   query.salario = 5;
+
+
+   db.SaveChanges();
+    return View();
+}
+
+-----------------------------------------------------------------------------
+<h2>Totalizar</h2>
+Total de la nomina es: @ViewBag.TotalSalario <br />
+Total de empleados es: @ViewBag.TotalEmpleados
+
+
+*****************************************************************************
+                        *** Llenar DropdownList ***
+                              **Con Datos**
+*****************************************************************************
+public ActionResult LlenarCombo()
+{
+  var empleados = db.Linq.ToList();
+
+  var listaEmpleados = new SelectList(empleados,"Id","Salario");
+  ViewBag.Empleados = listaEmpleados;
+
+  return View();
+        }
+
+-----------------------------------------------------------------------------
+
+  <h2>LlenarCombo</h2>
+  @Html.DropDownList("A",ViewBag.Empleados as SelectList,"Seleccione" )
+
+
+
+******************************************************************************
+                        ** Consultas LINQ Ejemplos
+*****************************************************************************
+[HttpPost]
+public ActionResult tablaAgenda(string BuscarNombre)
+{
+   var nombreBuscado = from contacto
+			in BD.Agendas
+			select contacto;
+
+       nombreBuscado = 
+       nombreBuscado.Where
+       (c => c.Nombre.Contains(BuscarNombre));
+   
+   if (string.IsNullOrEmpty(BuscarNombre))
+   {
+	nombreBuscado = 
+        nombreBuscado.Where
+        (c => c.Nombre.Contains(BuscarNombre));
+
+    }
+
+   return View(nombreBuscado);
+}
+
+
+
+*****************************************************************************
+       **** CONSULTAS LINK****
+*****************************************************************************
+public ActionResult Activo()
+ {
+      var query = (from a in db.Empleados
+                   where a.Estatus == "Activo"
+                   select a).Include(e => e.Cargos)
+                   .Include(k => k.Departamentos);
+
+            return View(query.ToList());
+ }
+
+public ActionResult Inactivo()
+{
+     var query = (from a in db.Empleados
+                  where a.Estatus == "Inactivo"
+                  select a).Include(e => e.Cargos)
+                  .Include(k => k.Departamentos);
+
+            return View(query.ToList());
+  }
+
+var query4 = (from a in BD.Empleados
+              where a.Estado == "Activo"
+               select a where a.NombreEmpleado == DropDownList).First();
+
+
+***************************************************************************
+
+*************************************************************************
+var query2 = (from a in BD.Empleados
+	       where a.Estado == "Activo"
+		select a).First();
+
+var query3 = (from a in BD.Empleados
+		where a.NombreEmpleado == DropDownList
+		select a).First();
